@@ -5,15 +5,31 @@ import Drinks from './components/drinks';
 import Orderform from './components/orderform';
 
 function App(){
-  useEffect(async()=>{
-    try {
-      let response = await fetch('http://localhost:3000/data');
-      let Data = await response.json();
-      console.log(Data); 
-    } catch (error){
-      console.log(error);
+  const[data,setData] = useState([]);
+  const[drinkData,setdrinkData] = useState([]);
+  let[view,setview] = useState(false);
+
+  useEffect(()=>{
+    async function callAsync(){
+      try{
+        let response = await fetch('http://localhost:3000/data');
+        let userData = await response.json();
+        // console.log(Data);
+        if(data.length == 0 && drinkData.length == 0){
+          setData(userData[0]);
+          setdrinkData(userData[1]);
+        }
+      }
+      catch(error){
+        console.log(error);
+      }
     }
-    
+    callAsync();
+    view = true;
+    setview(view);
+    console.log(data);
+    console.log(drinkData);
+    console.log(view);
   },[]);
 
   // const data = [
@@ -60,16 +76,27 @@ function App(){
 
   return(
     <div>
-      {/* <h2 className='App'>Prashant's Kitchen</h2>
-      <h3 className='App'>Main Course</h3>
-      <Fooditems dishType={data[0].dishType} dishName={data[0].dishName} dishPrice={data[0].dishPrice}></Fooditems>
-      <Fooditems dishType={data[1].dishType} dishName={data[1].dishName} dishPrice={data[1].dishPrice}></Fooditems>
-      <Fooditems dishType={data[2].dishType} dishName={data[2].dishName} dishPrice={data[2].dishPrice}></Fooditems>
-      <Fooditems dishType={data[3].dishType} dishName={data[3].dishName} dishPrice={data[3].dishPrice}></Fooditems>
-      <h3 className='App'>Drinks</h3>
-      {drinkData.map((item) => <Drinks dType={item.dType} dName={item.dName} dPrice={item.dPrice}/>)}
-      <h3 className='App'>Customer Form</h3>
-      <Orderform></Orderform> */}
+      {
+        view ? 
+        (
+          <>
+          <h2 className='App'>Prashant's Kitchen</h2>
+          <h3 className='App'>Main Course</h3>
+          <Fooditems dishType={data[0].dishType} dishName={data[0].dishName} dishPrice={data[0].dishPrice}></Fooditems>
+          <Fooditems dishType={data[1].dishType} dishName={data[1].dishName} dishPrice={data[1].dishPrice}></Fooditems>
+          <Fooditems dishType={data[2].dishType} dishName={data[2].dishName} dishPrice={data[2].dishPrice}></Fooditems>
+          <Fooditems dishType={data[3].dishType} dishName={data[3].dishName} dishPrice={data[3].dishPrice}></Fooditems>
+          <h3 className='App'>Drinks</h3>
+          {drinkData.map((item) => <Drinks dType={item.dType} dName={item.dName} dPrice={item.dPrice}/>)}
+          <h3 className='App'>Customer Form</h3>
+          <Orderform></Orderform>
+          </>
+        )
+        :
+        (
+          <></>
+        )
+      }
     </div>
   );
 }

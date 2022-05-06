@@ -46,13 +46,55 @@ const drinksSchema = mongoose.Schema({
 const foodModel = connection.model('food',foodSchema);
 const drinksModel = connection.model('drinks',drinksSchema);
 
+//   const data = [
+//     {
+//       dishType: 'Veg',
+//       dishName: 'Panner Tikka',
+//       dishPrice: 'INR 200'
+//     },
+//     {
+//       dishType: 'Veg',
+//       dishName: 'Panner Tikka Masala',
+//       dishPrice: 'INR 220'
+//     },
+//     {
+//       dishType: 'Non-veg',
+//       dishName: 'Chicken Curry',
+//       dishPrice: 'INR 300'
+//     },
+//     {
+//       dishType:'Veg',
+//       dishName: 'Panner Bhurji',
+//       dishPrice: 'INR 180'
+//     }
 
-//   foodData.create(food,function(err,msg){
+//   ]
+
+//   const drinkData = [
+//     {
+//       dType:'Mocktail',
+//       dName: 'Virgin Mojito',
+//       dPrice: 'INR 100'
+//     },
+//     {
+//       dType:'Mocktail',
+//       dName: 'Lemonade',
+//       dPrice: 'INR 80'
+//     },
+//     {
+//       dType:'Cocktail',
+//       dName: 'LIIT',
+//       dPrice: 'INR 150'
+//     }
+//   ]
+
+//   foodModel.create(data,function(err,msg){
 //       if(err)
 //         console.log(err)
 //   });
 
-//   drinksData.create(drinks,function(err,msg){
+
+//   drinksModel.create(drinkData,function(err,msg){
 //     if(err)
 //       console.log(err)
 // });
@@ -73,6 +115,5 @@ const drinksModel = connection.model('drinks',drinksSchema);
             });
       });   
   });
-
   
   app.listen(3000,function(){console.log('server started at 3000');});
